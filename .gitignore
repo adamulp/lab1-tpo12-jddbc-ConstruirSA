@@ -1,6 +1,7 @@
 /nbproject/private/
 private.xml
 /build/
+*.env
 
 # Compiled class file
 *.class
