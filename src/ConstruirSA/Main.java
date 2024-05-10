@@ -1,20 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package ConstruirSA;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author adam
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic heredsada
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(
+                    "jdbc:mariadb://localhost:3306/tpo10_db4_herramientasconstruirsa_g3",
+                    "root",
+                    "");
+            
+            JOptionPane.showMessageDialog(null, "trabajador agregado");
+            
+        } catch (SQLException ex) {
+            
+           JOptionPane.showMessageDialog(null, "Error de conexion");
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar driver");
+        }
+
     }
-    
+
 }
