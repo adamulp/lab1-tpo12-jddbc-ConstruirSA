@@ -8,7 +8,7 @@ public class ListarBD {
     public static void main(String[] args) {
         ArrayList<String> listaBD = listarBD(
         "org.mariadb.jdbc.Driver",
-        "jdbc:mariadb://localhost:3306/tpo10_db4_herramientasConstruirSA_g3",
+        "jdbc:mariadb://localhost:3306/",
         "root",
         ""        
         );
