@@ -4,7 +4,7 @@ import java.io.*;
 import javax.swing.*;
 
 public class GestorDeArchivoEnv {
-    private static final String RUTA_ARCHIVO_ENV = ".env";
+    private static String RUTA_ARCHIVO_ENV = "../.env";
     private String usuario;
     private String clave;
 
@@ -15,9 +15,31 @@ public class GestorDeArchivoEnv {
         this.usuario = usuario;
         this.clave = clave;
     }
-    
-    
-    
+
+    public static String getRUTA_ARCHIVO_ENV() {
+        return RUTA_ARCHIVO_ENV;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public static void setRUTA_ARCHIVO_ENV(String RUTA_ARCHIVO_ENV) {
+        GestorDeArchivoEnv.RUTA_ARCHIVO_ENV = RUTA_ARCHIVO_ENV;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+ 
     public static void main(String[] args) {
         // Averiguar is ya existe un archivo .env
         File envFile = new File(RUTA_ARCHIVO_ENV);
@@ -25,20 +47,22 @@ public class GestorDeArchivoEnv {
         
         if (envFile.exists()) {
             // Si .env existe, cargar las credenciales
-            envFileHandler = GestorDeArchivoEnv.loadCredentials();
+            envFileHandler = GestorDeArchivoEnv.cargarCredenciales();
         } else {
           
-            if(envFileHandler.obtenerUsuarioYclave()){
+            if(envFileHandler.ingresarUsuarioYclave()){
                 // Almanecer usuario y clave en el archivo .env
                 guardarCredenciales(envFileHandler.usuario, envFileHandler.clave);
             }
         }
     }
     
-    private static GestorDeArchivoEnv loadCredentials() {
+    
+    
+    public static GestorDeArchivoEnv cargarCredenciales(GestorDeArchivoEnv gestor, String rutaArchivo){
         String usr = "";
         String pass = "";
-        try (BufferedReader lector = new BufferedReader(new FileReader(RUTA_ARCHIVO_ENV))) {
+        try (BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo))) {
             String line;
             while ((line = lector.readLine()) != null) {
                 // Usando el formato "KEY=VALUE" en el .env
@@ -65,7 +89,11 @@ public class GestorDeArchivoEnv {
         return null;
     }
     
-    private Boolean obtenerUsuarioYclave() {
+    public static GestorDeArchivoEnv cargarCredenciales() {
+        return cargarCredenciales(new GestorDeArchivoEnv(), RUTA_ARCHIVO_ENV);
+    }
+    
+    private Boolean ingresarUsuarioYclave() {
         JTextField campoUsuario = new JTextField();
         JPasswordField campoContrasenia = new JPasswordField();
         
@@ -74,7 +102,7 @@ public class GestorDeArchivoEnv {
             "Contraseña:", campoContrasenia
         };
         
-        int option = JOptionPane.showConfirmDialog(null, campos, "Enter credentials:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int option = JOptionPane.showConfirmDialog(null, campos, "Ingresar Credenciales:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
             this.usuario = campoUsuario.getText();
             this.clave = new String(campoContrasenia.getPassword());
@@ -87,7 +115,7 @@ public class GestorDeArchivoEnv {
 
     }
     
-    private static void guardarCredenciales(String usuario, String clave) {
+    public static void guardarCredenciales(String usuario, String clave) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(RUTA_ARCHIVO_ENV))) {
             // Escrbirir los datos en un archivo .env
             writer.write("DB_USERNAME=" + usuario);
