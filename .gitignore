@@ -2,6 +2,8 @@ nbproject/private/
 project.properties
 private.xml
 /build/
+*properties
+*.env
 
 # Compiled class file
 *.class
