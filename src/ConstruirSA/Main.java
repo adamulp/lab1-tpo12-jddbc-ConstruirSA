@@ -19,7 +19,7 @@ public class Main {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(
-                    "jdbc:mariadb://localhost:3306/tpo10_db4_herramientasconstruirsa_g3",
+                    "jdbc:mariadb://localhost:3306/tpo10_db4_herramientasConstruirSA_g3",
                     "root",
                     "");
             
