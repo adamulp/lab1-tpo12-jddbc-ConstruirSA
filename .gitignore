@@ -1,3 +1,6 @@
+**/*.properties
+/nbproject/private
+*.xml
 nbproject/private/
 project.properties
 private.xml
@@ -32,3 +35,4 @@ replay_pid*
 /dist/
 nbproject/project.properties
 
+/nbproject
