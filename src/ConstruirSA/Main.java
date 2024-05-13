@@ -26,7 +26,7 @@ public class Main {
 //            JOptionPane.showMessageDialog(null, "trabajador agregado");
             
             
-            //INSERT EMPLEADOS = ESCLAVOS
+            //INSERT EMPLEADOS
             
 //            String sql= "insert into empleado(dni, apellido, nombre, acceso, estado)"
 //                    + " values "
@@ -68,7 +68,7 @@ public class Main {
 //            }
 
 
-                //UPDATE A EMPLEADO
+                //UPDATE AN EMPLEADO
                 
                String sql = "update empleado set estado = 0 where dni = 42242442";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -88,6 +88,7 @@ public class Main {
             ex.printStackTrace();
             
            JOptionPane.showMessageDialog(null, "Error de conexion");
+           // Error: 1049-42000: Unknown database
             
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar driver");
